@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: | 
-        docker build . --file Dockerfile --tag codemohitpra2103/example:latest
-        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_ID }} --password-stdin
-        docker push codemohitpra2103/example
+    # - uses: actions/checkout@v3
+    # - name: Build the Docker image
+    #   run: | 
+    #     docker build . --file Dockerfile --tag codemohitpra2103/example:latest
+    #     echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_ID }} --password-stdin
+    #     docker push codemohitpra2103/example
       # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - name: Generate deployment package
       run: zip -r deploy.zip . -x '*.git*'
