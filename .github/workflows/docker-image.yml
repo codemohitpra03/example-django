@@ -20,3 +20,13 @@ jobs:
         echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_ID }} --password-stdin
         docker push codemohitpra2103/example
       # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v22
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: example
+        environment_name: Example-env
+        version_label: 12345
+        region: ap-south-1
