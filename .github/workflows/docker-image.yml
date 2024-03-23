@@ -17,6 +17,6 @@ jobs:
     - name: Build the Docker image
       run: | 
         docker build . --file Dockerfile --tag codemohitpra2103/example:latest
-        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_ID }} --password-stdin
         docker push codemohitpra2103/example
       # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
