@@ -22,23 +22,24 @@ jobs:
       
         
       
-    # - name: Build the Docker image
-    #   run: | 
-    #     docker build . --file Dockerfile --tag codemohitpra2103/example:latest
-    #     echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_ID }} --password-stdin
-    #     docker push codemohitpra2103/example
-    #   # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-    # - name: Generate deployment package
-    #   run: zip -r deploy.zip . -x '*.git*'
+    - name: Build the Docker image
+      run: | 
+        docker build . --file Dockerfile --tag codemohitpra2103/example:latest
+        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_ID }} --password-stdin
+        docker push codemohitpra2103/example
+      # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Generate deployment package
+      run: zip -r deploy.zip . -x '*.git*'
       
-    # - name: Deploy to EB
-    #   uses: einaregilsson/beanstalk-deploy@v22
-    #   with:
-    #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     application_name: django
-    #     environment_name: Django-env
-    #     version_label: "$NOW"
-    #     region: ap-south-1
-    #     deployment_package: deploy.zip
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v22
+      run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: django
+        environment_name: Django-env
+        version_label: "$NOW"
+        region: ap-south-1
+        deployment_package: deploy.zip
       
