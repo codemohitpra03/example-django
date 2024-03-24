@@ -21,7 +21,7 @@ jobs:
       id: date
       run: | 
         echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> "$GITHUB_OUTPUT"
-        echo ${{ steps.date.outputs.NOW }}
+        ${{ steps.date.outputs.NOW }}
       
     # - name: Build the Docker image
     #   run: | 
