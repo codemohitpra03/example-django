@@ -20,12 +20,11 @@ jobs:
     #   run: echo "::set-output name=date::$(date)"
     - name: Set current date as env variable
       id: date
-      run: | 
-        echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> "$GITHUB_OUTPUT"
-        echo ${{ steps.date.outputs.NOW }}
     - env:
         OUTPUT1: ${{build.outputs.output1}}
-      run: echo "$OUTPUT1"
+      run: | 
+        echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> "$GITHUB_OUTPUT"
+        echo "$OUTPUT1"
         
       
     # - name: Build the Docker image
