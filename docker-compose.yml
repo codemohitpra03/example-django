@@ -2,6 +2,6 @@ version: '3.9'
 
 services:
   django:
-    build: .
+    image: codemohitpra2103/example:latest 
     ports:
       - '80:8000'
